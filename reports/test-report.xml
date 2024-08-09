@@ -1,0 +1,15 @@
+<testExecutions version="1">
+<file path="tests/api.test.mjs">
+<testCase name="API Tests fetchUserCreds returns user credentials" duration="11" />
+<testCase name="API Tests fetchUserCreds handles no credentials" duration="2" />
+<testCase name="API Tests fetchUserCreds handles error" duration="51" />
+<testCase name="API Tests generateSignedUrl returns a valid URL" duration="2" />
+<testCase name="API Tests generateSignedUrl returns null when URL is unavailable" duration="2" />
+<testCase name="API Tests generateSignedUrl throws an error on API error" duration="4" />
+<testCase name="API Tests addEssay to update db with the esssay and return success" duration="2" />
+<testCase name="API Tests addEssay to update db with the esssay and return false in success" duration="3" />
+<testCase name="API Tests addEssay should not throw error when network error" duration="0" />
+<testCase name="API Tests uploadFileToS3 successfully uploads the file" duration="1" />
+<testCase name="API Tests uploadScreenshotFileToS3 successfully uploads the file" duration="1" />
+</file>
+</testExecutions>

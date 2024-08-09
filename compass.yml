@@ -1,0 +1,17 @@
+name: queue-manager
+id: ari:cloud:compass:fce7f9f3-3e47-4132-b3cf-e4562e4a8758:component/2a682876-0c1b-4a7c-9989-62345d77e155/de43f983-802b-4b24-a374-9a28caa7398e
+description: null
+configVersion: 1
+typeId: SERVICE
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/Automation-Upthink/queue-manager
+relationships:
+  DEPENDS_ON: []
+labels:
+  - language:javascript
+  - source:github
+customFields: null

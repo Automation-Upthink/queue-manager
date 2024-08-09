@@ -1,0 +1,6 @@
+common_metrics_id: ari:cloud:compass:fce7f9f3-3e47-4132-b3cf-e4562e4a8758:metric-source/2a682876-0c1b-4a7c-9989-62345d77e155
+target_metrics:
+  - cfr_hotfix_to_release: a374bd80-fc7d-476d-b094-6cef8d483aaf
+  - cfr_bugs_to_tasks_ratio: fd76d5bc-b349-418e-a573-598d4356b5e9
+  - cfr_bug_to_feature: 8954c834-3788-4c24-8ae9-f0b3f740bc0a
+  - cfr_bug_release_ratio: 43454e01-a633-4441-9d64-646a7de7d15a

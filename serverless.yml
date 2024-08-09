@@ -1,0 +1,44 @@
+useDotenv: true
+service: ${env:NAME}
+plugins:
+  - serverless-dotenv-plugin
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-south-1
+  stage: ${opt:stage,'dev'}
+  memorySize: 10240
+  timeout: 900
+  environment:
+    # Define environment variables here if needed
+
+functions:
+  allClients:
+    ephemeralStorageSize: 10240
+    image: 462203881643.dkr.ecr.ap-south-1.amazonaws.com/queue-management-${opt:stage,'dev'}:latest
+
+  brainFuse:
+    ephemeralStorageSize: 10240
+    image: 462203881643.dkr.ecr.ap-south-1.amazonaws.com/queue-management-${opt:stage,'dev'}:latest
+    events:
+      - eventBridge:
+          name: BrainFuseClient-${opt:stage,'dev'}
+          enabled: false
+          description: This will trigger all client lambda script every 5 mins for brainFuse
+          schedule: rate(2 minutes)
+          input:
+            clientName: BrainFuse
+            singleDownload: false
+            uuid: allFetch-BF
+
+  clientEssayLogs:
+    ephemeralStorageSize: 10240
+    image: 462203881643.dkr.ecr.ap-south-1.amazonaws.com/qm-essaycount-${opt:stage,'dev'}:latest
+    events:
+      - eventBridge:
+          name: QM-EssayCount-${opt:stage,'dev'}
+          enabled: false
+          description: This will trigger all client lambda script every 1 hour for all clients
+          schedule: rate(1 hour)
