@@ -74,6 +74,7 @@ export async function handler (event) {
       await browser?.close()
     }
   }
+  console.log(event);
   return event
 }
 // handler({ clientName: 'BrainFuse', singleDownload: true, uuid: 'testing-retry' })
