@@ -17,10 +17,10 @@ export async function performActionBrainFuse (uuid, user, browser, isSingle) {
       await context.close()
       return false
     }
-
+    console.log("Executed Before")
     const visible = await checkEssays(page)
     // slackLogClient(uuid, 'Essays available - ' + visible, slackClientName)
-
+    console.log("Executed")
     // proceed with further logic if essays are available
     const essayAccepted = await browseEssays(uuid, page, context, user, isSingle)
     await page.close()
@@ -136,6 +136,11 @@ export async function browseEssays (uuid, page, context, user, isSingle) {
       } catch (error) {
         // slackLogClient(uuid, 'Error while getting dueDate for - ' + taskId, slackClientName)
         continue
+      }
+      if (!isTimeScheduled && hasDueDatePassed(essayDueDate)) {
+        await newPage.close();
+        await page.getByTitle('Go Back').click();
+        continue;
       }
       if (tableData === 'Uploaded Doc.') {
         // only download essays as per the download limit
@@ -294,4 +299,11 @@ export function isValidFormat (fileName) {
   const fileExtension = fileName.slice(fileName.lastIndexOf('.'))
 
   return acceptedExtensions.includes(fileExtension.toLowerCase())
+}
+
+
+function hasDueDatePassed(dueDate) {
+  const currentDate = new Date();
+  const dueDateObject = new Date(dueDate);
+  return dueDateObject < currentDate;
 }
