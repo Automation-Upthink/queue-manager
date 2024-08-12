@@ -202,7 +202,7 @@ export async function downloadAndAcceptEssay (uuid, newPage, page, td, taskId, u
 
       // uncomment below code to start accepting essays
       // accept essay
-      await newPage.getByRole('button', { name: 'Accept' }).click()
+      // await newPage.getByRole('button', { name: 'Accept' }).click()
 
       // check if progress bar is visible
       let visible = await newPage.locator('#divPopupProgress').isVisible()
@@ -243,10 +243,10 @@ export async function downloadAndAcceptEssay (uuid, newPage, page, td, taskId, u
         // await page.waitForTimeout(1500)
         // upload the essay file to our server
         // now generate signedUrl
-        // const signedUrl = await generateSignedUrl(uuid, fileName, 'file', taskId, slackClientName)
+        const signedUrl = await generateSignedUrl(uuid, fileName, 'file', taskId, slackClientName)
         // upload the file to s3
         const fileContent = fs.readFileSync(`/tmp/${fileName}`)
-        // await uploadFileToS3(uuid, signedUrl, fileContent, taskId, slackClientName)
+        await uploadFileToS3(uuid, signedUrl, fileContent, taskId, slackClientName)
         fs.unlinkSync(`/tmp/${fileName}`)
         // upload screenshot to s3
         // take screenshot
@@ -258,11 +258,11 @@ export async function downloadAndAcceptEssay (uuid, newPage, page, td, taskId, u
         })
 
         // get signed url for screenshot
-        // const ssSignedUrl = await generateSignedUrl(uuid, screenshotName, 'screenshot', taskId, slackClientName)
+        const ssSignedUrl = await generateSignedUrl(uuid, screenshotName, 'screenshot', taskId, slackClientName)
 
         // upload the file to s3
         const ssFileContent = fs.readFileSync(`/tmp/${screenshotName}`)
-        // await uploadScreenshotFileToS3(uuid, ssSignedUrl, ssFileContent, taskId, slackClientName)
+        await uploadScreenshotFileToS3(uuid, ssSignedUrl, ssFileContent, taskId, slackClientName)
         fs.unlinkSync(`/tmp/${screenshotName}`)
 
         // this means essay was accepted now increment the acceptedessay count
